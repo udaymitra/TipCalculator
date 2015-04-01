@@ -7,6 +7,7 @@
 //
 
 #import "TipViewController.h"
+#import "SettingsViewController.h"
 
 @interface TipViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *billTextField;
@@ -14,6 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UISlider *tipPercentSlider;
 @property (weak, nonatomic) IBOutlet UILabel *tipPercentValue;
+@property (weak, nonatomic) IBOutlet UILabel *firstSplitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondSplitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *thirdSplitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *firstSplitValue;
+@property (weak, nonatomic) IBOutlet UILabel *secondSplitValue;
+@property (weak, nonatomic) IBOutlet UILabel *thirdSplitValue;
 
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
@@ -49,7 +56,7 @@
     [self.view endEditing:YES];
 }
 
-- (void) updateValues {
+- (void)updateValues {
     float billValue = [self.billTextField.text floatValue];
     int tipPercentValue = (int) self.tipPercentSlider.value;
     float tipAmount = billValue * tipPercentValue / 100.0;
@@ -61,7 +68,18 @@
 }
 
 - (void) onSettingsButton {
+    [self.navigationController pushViewController:[[SettingsViewController alloc] init] animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int defaultTipPercent = [defaults integerForKey:@"defaultTipPercent"];
+    int split1Value = [defaults integerForKey:@"split1Value"];
+    int split2Value = [defaults integerForKey:@"split1Value"];
+    int split3Value = [defaults integerForKey:@"split1Value"];
     
+    self.tipPercentSlider.value = defaultTipPercent;
+    [self updateValues];
 }
 
 @end
