@@ -6,29 +6,20 @@
 //  Copyright (c) 2015 udaymitra. All rights reserved.
 //
 
-#ifndef TipCalculator_UserSettings_h
-#define TipCalculator_UserSettings_h
+#import "UserSettings.h"
 
-#import <Foundation/Foundation.h>
+@interface UserSettings ()
+@end
 
-@interface UserSettings : NSObject
 
-@property int defaultTipPercent;
-@property int split1Value;
-@property int split2Value;
-@property int split3Value;
+@implementation UserSettings
 
-+ (UserSettings)fromDefaults {
+- (void)updateFromDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    UserSettings settings = [UserSettings init];
-    settings.defaultTipPercent = [defaults integerForKey:@"defaultTipPercent"];
-    settings.split1Value = [defaults integerForKey:@"split1Value"];
-    settings.split2Value = [defaults integerForKey:@"split2Value"];
-    settings.split3Value = [defaults integerForKey:@"split3Value"];
-}
-
-- (id)init {
-    return self;
+    self.defaultTipPercent = [defaults integerForKey:@"defaultTipPercent"];
+    self.split1Value = [defaults integerForKey:@"split1Value"];
+    self.split2Value = [defaults integerForKey:@"split2Value"];
+    self.split3Value = [defaults integerForKey:@"split3Value"];
 }
 
 - (void)writeDefaults {
@@ -43,4 +34,3 @@
 
 @end
 
-#endif

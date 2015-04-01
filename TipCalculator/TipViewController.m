@@ -8,6 +8,7 @@
 
 #import "TipViewController.h"
 #import "SettingsViewController.h"
+#import "UserSettings.h"
 
 @interface TipViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *billTextField;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstSplitValue;
 @property (weak, nonatomic) IBOutlet UILabel *secondSplitValue;
 @property (weak, nonatomic) IBOutlet UILabel *thirdSplitValue;
+@property UserSettings *userSettings;
 
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
@@ -32,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Tip Calculator";
+    self.userSettings = [[UserSettings alloc] init];
     [self updateValues];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
 }
@@ -61,10 +64,22 @@
     int tipPercentValue = (int) self.tipPercentSlider.value;
     float tipAmount = billValue * tipPercentValue / 100.0;
     float totalAmount = billValue + tipAmount;
-
+    
     self.tipPercentValue.text = [NSString stringWithFormat:@"%d%%", tipPercentValue];
     self.tipAmountLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
+
+    float split1Amount = totalAmount / self.userSettings.split1Value;
+    float split2Amount = totalAmount / self.userSettings.split2Value;
+    float split3Amount = totalAmount / self.userSettings.split3Value;
+    
+    self.firstSplitLabel.text = [NSString stringWithFormat:@"%d splits", self.userSettings.split1Value];
+    self.secondSplitLabel.text = [NSString stringWithFormat:@"%d splits", self.userSettings.split2Value];
+    self.thirdSplitLabel.text = [NSString stringWithFormat:@"%d splits", self.userSettings.split3Value];
+
+    self.firstSplitValue.text = [NSString stringWithFormat:@"$%0.2f", split1Amount];
+    self.secondSplitValue.text = [NSString stringWithFormat:@"$%0.2f", split2Amount];
+    self.thirdSplitValue.text = [NSString stringWithFormat:@"$%0.2f", split3Amount];
 }
 
 - (void) onSettingsButton {
@@ -72,13 +87,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    int defaultTipPercent = [defaults integerForKey:@"defaultTipPercent"];
-    int split1Value = [defaults integerForKey:@"split1Value"];
-    int split2Value = [defaults integerForKey:@"split1Value"];
-    int split3Value = [defaults integerForKey:@"split1Value"];
-    
-    self.tipPercentSlider.value = defaultTipPercent;
+    [self.userSettings updateFromDefaults];
+    self.tipPercentSlider.value = self.userSettings.defaultTipPercent;
     [self updateValues];
 }
 

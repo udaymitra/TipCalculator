@@ -17,6 +17,7 @@
 		04979FB01AC535DA004F6A1E /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04979FAE1AC535DA004F6A1E /* TipViewController.xib */; };
 		04979FB41AC9278A004F6A1E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04979FB21AC9278A004F6A1E /* SettingsViewController.m */; };
 		04979FB51AC9278A004F6A1E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04979FB31AC9278A004F6A1E /* SettingsViewController.xib */; };
+		04979FBC1ACBAB23004F6A1E /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 04979FBB1ACBAB23004F6A1E /* UserSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		04979FB21AC9278A004F6A1E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		04979FB31AC9278A004F6A1E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		04979FBA1ACAF638004F6A1E /* UserSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
+		04979FBB1ACBAB23004F6A1E /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				04979FB21AC9278A004F6A1E /* SettingsViewController.m */,
 				04979FB31AC9278A004F6A1E /* SettingsViewController.xib */,
 				04979FBA1ACAF638004F6A1E /* UserSettings.h */,
+				04979FBB1ACBAB23004F6A1E /* UserSettings.m */,
 			);
 			path = TipCalculator;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04979F8C1AC53236004F6A1E /* AppDelegate.m in Sources */,
+				04979FBC1ACBAB23004F6A1E /* UserSettings.m in Sources */,
 				04979FAF1AC535DA004F6A1E /* TipViewController.m in Sources */,
 				04979F891AC53236004F6A1E /* main.m in Sources */,
 				04979FB41AC9278A004F6A1E /* SettingsViewController.m in Sources */,
