@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "UserSettings.h"
 
 @interface SettingsViewController ()
 @property (weak, nonatomic) IBOutlet UISlider *defaultTipSlider;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *split1Value;
 @property (weak, nonatomic) IBOutlet UILabel *split2Value;
 @property (weak, nonatomic) IBOutlet UILabel *split3Value;
+@property UserSettings *userSettings;
 
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
@@ -27,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.userSettings = [[UserSettings alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,39 +42,26 @@
 }
 
 - (void)updateValues {
-    int defaultTipPercent = [self.defaultTipSlider value];
-    int split1StepperValue = [self.split1Stepper value];
-    int split2StepperValue = [self.split2Stepper value];
-    int split3StepperValue = [self.split3Stepper value];
+    self.userSettings.defaultTipPercent = [self.defaultTipSlider value];
+    self.userSettings.split1Value = [self.split1Stepper value];
+    self.userSettings.split2Value = [self.split2Stepper value];
+    self.userSettings.split3Value = [self.split3Stepper value];
     
-    self.defaultTipValue.text = [NSString stringWithFormat:@"%d%%", defaultTipPercent];
-    self.split1Value.text = [NSString stringWithFormat:@"%d", split1StepperValue];
-    self.split2Value.text = [NSString stringWithFormat:@"%d", split2StepperValue];
-    self.split3Value.text = [NSString stringWithFormat:@"%d", split3StepperValue];
+    self.defaultTipValue.text = [NSString stringWithFormat:@"%d%%", self.userSettings.defaultTipPercent];
+    self.split1Value.text = [NSString stringWithFormat:@"%d", self.userSettings.split1Value];
+    self.split2Value.text = [NSString stringWithFormat:@"%d", self.userSettings.split2Value];
+    self.split3Value.text = [NSString stringWithFormat:@"%d", self.userSettings.split3Value];
     
-    [self storeDefaults:defaultTipPercent:split1StepperValue:split2StepperValue:split3StepperValue];
-}
-
-- (void)storeDefaults:(int)defaultTipPercent :(int)split1Value :(int)split2Value :(int)split3Value {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:defaultTipPercent forKey:@"defaultTipPercent"];
-    [defaults setInteger:split1Value forKey:@"split1Value"];
-    [defaults setInteger:split2Value forKey:@"split2Value"];
-    [defaults setInteger:split3Value forKey:@"split3Value"];
-    [defaults synchronize];
+    [self.userSettings writeDefaults];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    int defaultTipPercent = [defaults integerForKey:@"defaultTipPercent"];
-    int split1Value = [defaults integerForKey:@"split1Value"];
-    int split2Value = [defaults integerForKey:@"split1Value"];
-    int split3Value = [defaults integerForKey:@"split1Value"];
+    [self.userSettings updateFromDefaults];
     
-    self.defaultTipSlider.value = defaultTipPercent;
-    self.split1Stepper.value = split1Value;
-    self.split2Stepper.value = split2Value;
-    self.split3Stepper.value = split3Value;
+    self.defaultTipSlider.value = self.userSettings.defaultTipPercent;
+    self.split1Stepper.value = self.userSettings.split1Value;
+    self.split2Stepper.value = self.userSettings.split2Value;
+    self.split3Stepper.value = self.userSettings.split3Value;
     
     [self updateValues];
 }
