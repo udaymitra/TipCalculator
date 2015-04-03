@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstSplitValue;
 @property (weak, nonatomic) IBOutlet UILabel *secondSplitValue;
 @property (weak, nonatomic) IBOutlet UILabel *thirdSplitValue;
+@property (weak, nonatomic) IBOutlet UIView *resultViewShader;
 @property UserSettings *userSettings;
 
 - (IBAction)onTap:(id)sender;
@@ -118,6 +119,7 @@
     [self.secondSplitValue setHidden:hide];
     [self.thirdSplitLabel setHidden:hide];
     [self.thirdSplitValue setHidden:hide];
+    [self.resultViewShader setHidden:hide];
 }
 
 @end

@@ -84,7 +84,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.61639660299820087" green="1" blue="0.66028169614280063" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.63064150789999995" green="1" blue="0.82876307729999998" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
