@@ -71,6 +71,7 @@
 }
 
 - (void)updateValues {
+    [self setResultsVisibility];
     float billValue = [self.billTextField.text floatValue];
     int tipPercentValue = (int) self.tipPercentSlider.value;
     float tipAmount = billValue * tipPercentValue / 100.0;
@@ -104,6 +105,19 @@
     [self.userSettings updateFromDefaults];
     self.tipPercentSlider.value = self.userSettings.defaultTipPercent;
     [self updateValues];
+}
+
+- (void)setResultsVisibility {
+    BOOL hide =[self.billTextField.text length] == 0 ||
+                !([self.billTextField.text floatValue] > 0);
+    [self.tipAmountLabel setHidden:hide];
+    [self.totalLabel setHidden:hide];
+    [self.firstSplitLabel setHidden:hide];
+    [self.firstSplitValue setHidden:hide];
+    [self.secondSplitLabel setHidden:hide];
+    [self.secondSplitValue setHidden:hide];
+    [self.thirdSplitLabel setHidden:hide];
+    [self.thirdSplitValue setHidden:hide];
 }
 
 @end
