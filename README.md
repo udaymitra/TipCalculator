@@ -19,4 +19,5 @@ In my application I accidentally used my work github user name (umantripragada).
 Please use this github user name (udaymitra) for my application (email:udaymitra4u@gmail.com).
 
 Walkthrough of all user stories:
+
 ![alt tag](https://github.com/udaymitra/TipCalculator/blob/master/TipCalculator.gif)
