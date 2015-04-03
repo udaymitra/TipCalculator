@@ -12,6 +12,9 @@ Completed user stories:
  
 Notes:
 
+I coded this app in Objective-C.
+I will take a stab at writing tip calculator app in swift in a different project.
+
 In my application I accidentally used my work github user name (umantripragada).
 Please use this github user name (udaymitra) for my application (email:udaymitra4u@gmail.com).
 
