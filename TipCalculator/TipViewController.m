@@ -34,9 +34,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Tip Calculator";
-    self.userSettings = [[UserSettings alloc] init];
-    [self updateValues];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+
+    self.userSettings = [[UserSettings alloc] init];
+    [self.userSettings updateFromDefaults];
+    
+    // if user used the app in the last 10 mins load the last entered bill amount
+    NSDate *now = [NSDate date];
+    NSTimeInterval secs = [now timeIntervalSinceDate:self.userSettings.lastUsedDate];
+    if (secs < 600) {
+        self.billTextField.text = [NSString stringWithFormat:@"%0.2lf", self.userSettings.lastEnteredBillAmount];
+    } else {
+        self.userSettings.lastEnteredBillAmount = 0; // clear the last entered bill amount
+    }
+    [self updateValues];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +91,9 @@
     self.firstSplitValue.text = [NSString stringWithFormat:@"$%0.2f", split1Amount];
     self.secondSplitValue.text = [NSString stringWithFormat:@"$%0.2f", split2Amount];
     self.thirdSplitValue.text = [NSString stringWithFormat:@"$%0.2f", split3Amount];
+    
+    self.userSettings.lastEnteredBillAmount = billValue;
+    [self.userSettings writeDefaults];
 }
 
 - (void) onSettingsButton {

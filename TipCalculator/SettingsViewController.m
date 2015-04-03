@@ -30,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.userSettings = [[UserSettings alloc] init];
+    [self.userSettings updateFromDefaults];
+    
 }
 
 - (void)didReceiveMemoryWarning {

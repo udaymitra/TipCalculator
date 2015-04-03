@@ -16,6 +16,8 @@
 @property int split1Value;
 @property int split2Value;
 @property int split3Value;
+@property float lastEnteredBillAmount;
+@property NSDate *lastUsedDate;
 
 - (void)updateFromDefaults;
 - (void)writeDefaults;
